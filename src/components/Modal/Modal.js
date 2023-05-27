@@ -1,15 +1,15 @@
-import {useEffect} from "react";
-import { createPortal } from 'react-dom';
+import {useEffect} from 'react';
+import {createPortal} from 'react-dom';
 import './Modal.css'
 
 const modalRoot = document.querySelector('#root-modal');
 
-export default function Modal({onClose, children}){
+export default function Modal({children, onClose}){
        useEffect(()=>{
-        window.addEventListener('keydown', handleKeyDown)
-     
+        window.addEventListener('keydown', handleKeyDown);
+
         return ()=>{
-        window.removeEventListener('keydown', handleKeyDown)
+        window.removeEventListener('keydown', handleKeyDown);
        }});
         
 const handleKeyDown = event => {
@@ -17,18 +17,18 @@ const handleKeyDown = event => {
                onClose();
         }}
 
-        const handleBackdropClick = event => {
-                if (event.currentTarget === event.target) {
+const handleBackdropClick = event => {
+                if (event.currentTarget === event.target){
                       onClose();
                     }}
-        
 
-       
-        return createPortal(  <div class="Overlay" onClick={handleBackdropClick}>
+return createPortal( 
+<div class="Overlay" onClick={handleBackdropClick}>
                 <div class="Modal">
                 {children}
                 </div>
-              </div>, modalRoot
+              </div>, 
+              modalRoot,
               ); 
       
 }

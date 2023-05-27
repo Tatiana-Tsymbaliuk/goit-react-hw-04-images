@@ -13,18 +13,20 @@ export default function App(){
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [largeImage, setLargeImage] = useState('');
-  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState('0');
   const [currentAmount, setCurrentAmount] = useState(0);
   const [error, setError] = useState(null);
 
 const handleFormSubmit = nameSearch=>{
- 
   setNameSearch(nameSearch);
     setFotos([]);
     setCurrentPage(1);
     setError(null);
     setTotalAmount('0');
     setCurrentAmount(0);
+    setLoading(false);
+    setShowModal(false);
+    setLargeImage('');
 }
     
   const getFoto = async () =>{         
@@ -46,19 +48,18 @@ const handleFormSubmit = nameSearch=>{
             
             useEffect(() => {
               if (!nameSearch) return;
-          
               getFoto();
               // eslint-disable-next-line
             }, [nameSearch]);
 
   const handleGalleryItem = (largeImageSrc) => {                
-          setLargeImage(largeImageSrc)
-          setShowModal(true)         
+          setLargeImage(largeImageSrc);
+          setShowModal(true);         
       };
 
   const toggleModal = () => {
-      setShowModal(prevShowModal => !prevShowModal)
-      setLargeImage('')
+      setShowModal(prevShowModal => !prevShowModal);
+      setLargeImage('');
           };
 
         const needToShowLoadMore = fotos.length !== 0 && currentAmount !== totalAmount;
