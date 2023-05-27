@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import Searchbar from '../components/Searchbar/Searchbar';
 import ImageGallery from '../components/ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import fetchFoto from '../api/api';
 import Modal from './Modal/Modal';
 import Loader from './Loader/Loader';
-
+debugger
 export default function App(){
   const [nameSearch, setNameSearch] = useState('');
   const [fotos, setFotos] = useState([]);
@@ -46,10 +46,10 @@ const handleFormSubmit = nameSearch=>{
             setLoading(false)
             }}
     useEffect(()=>{  
-              if(!nameSearch) {
-                return; 
-              } 
-           getFoto();
+              // if(!nameSearch) {
+              //    
+              // } 
+           getFoto(); return;
           });
 
   const handleGalleryItem = (largeImageSrc) => {                

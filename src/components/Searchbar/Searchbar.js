@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {FaSistrix} from 'react-icons/fa';
 import './Searchbar.css'
 
