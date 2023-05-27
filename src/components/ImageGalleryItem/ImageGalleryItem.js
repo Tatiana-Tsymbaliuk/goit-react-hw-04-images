@@ -2,7 +2,7 @@
 import '../ImageGalleryItem/ImageGalleryItem.css'
 const ImageGalleryItem = ({image, onImageClick}) => {
   const bigImage = () => onImageClick(image.largeImageURL);
-    return(<li className="ImageGalleryItem">       
+    return(<li className="ImageGalleryItem" >       
             <img 
             src={image.webformatURL} 
             alt={image.tags} 

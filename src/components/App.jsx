@@ -5,7 +5,7 @@ import Button from './Button/Button';
 import fetchFoto from '../api/api';
 import Modal from './Modal/Modal';
 import Loader from './Loader/Loader';
-debugger
+
 export default function App(){
   const [nameSearch, setNameSearch] = useState('');
   const [fotos, setFotos] = useState([]);
@@ -13,16 +13,14 @@ export default function App(){
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [largeImage, setLargeImage] = useState('');
-  const [totalAmount, setTotalAmount] = useState('0');
+  const [totalAmount, setTotalAmount] = useState(0);
   const [currentAmount, setCurrentAmount] = useState(0);
-  const [errors, setError] = useState(null);
-
-
-
+  const [error, setError] = useState(null);
 
 const handleFormSubmit = nameSearch=>{
-  setFotos([]);
+ 
   setNameSearch(nameSearch);
+    setFotos([]);
     setCurrentPage(1);
     setError(null);
     setTotalAmount('0');
@@ -33,24 +31,25 @@ const handleFormSubmit = nameSearch=>{
     setLoading(true)
     try {
       const {hits, totalHits} = await fetchFoto(nameSearch, currentPage);
-    setFotos(prevFotos => (
-       [...prevFotos, ...hits]))
-    setCurrentPage(prevCurrentPage => (prevCurrentPage.currentPage + 1
-              )); 
+    setFotos(prevFotos => 
+       [...prevFotos, ...hits])
+    setCurrentPage(prevCurrentPage => prevCurrentPage + 1
+              ); 
     setTotalAmount(totalHits);
-    setCurrentAmount(prevCurrentAmount =>(prevCurrentAmount.currentAmount + hits.length))         
+    setCurrentAmount(prevCurrentAmount =>prevCurrentAmount + hits.length)         
             } catch (error) {
-              console.log('Smth wrong with App fetch', errors);
+              console.log('Smth wrong with App fetch', error);
               setError({error});
             }finally{
             setLoading(false)
             }}
-    useEffect(()=>{  
-              // if(!nameSearch) {
-              //    
-              // } 
-           getFoto(); return;
-          });
+            
+            useEffect(() => {
+              if (!nameSearch) return;
+          
+              getFoto();
+              // eslint-disable-next-line
+            }, [nameSearch]);
 
   const handleGalleryItem = (largeImageSrc) => {                
           setLargeImage(largeImageSrc)
@@ -58,20 +57,21 @@ const handleFormSubmit = nameSearch=>{
       };
 
   const toggleModal = () => {
-      setShowModal(prevShowModal => (!prevShowModal.showModal))
+      setShowModal(prevShowModal => !prevShowModal)
       setLargeImage('')
           };
 
-   const needToShowLoadMore = fotos.length !== 0 && currentAmount !== totalAmount;
+        const needToShowLoadMore = fotos.length !== 0 && currentAmount !== totalAmount;
         return(
           <div> 
-            <Searchbar onSubmit={handleFormSubmit}/>
-             { loading && <Loader/> } 
+           <Searchbar onSubmit={handleFormSubmit}/>
+           { loading && <Loader/> } 
            <ImageGallery fotos={fotos} onImageClick={handleGalleryItem}/>
            {showModal&& <Modal onClose ={toggleModal}>
            <img src={largeImage} alt="" />
            </Modal> }             
            { needToShowLoadMore ? (<Button onLoadFoto ={getFoto}/>) :<></>}
+           {error && (<h2>Oops! 😫</h2>)}
           </div>       
           );
 };
