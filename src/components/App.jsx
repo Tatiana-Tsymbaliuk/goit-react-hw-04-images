@@ -3,7 +3,7 @@ import Searchbar from '../components/Searchbar/Searchbar';
 import ImageGallery from '../components/ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import fetchFoto from '../api/api';
-import Modal from './Modal/Modal';
+import Modal from '../components/Modal/Modal';
 import Loader from './Loader/Loader';
 
 export default function App(){

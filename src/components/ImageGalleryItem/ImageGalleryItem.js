@@ -1,12 +1,12 @@
 //import React from 'react';
 import '../ImageGalleryItem/ImageGalleryItem.css'
 const ImageGalleryItem = ({image, onImageClick}) => {
-  const bigImage = () => onImageClick(image.largeImageURL);
+
     return(<li className="ImageGalleryItem" >       
             <img 
             src={image.webformatURL} 
             alt={image.tags} 
-            onClick={bigImage}
+            onClick={() => onImageClick(image.largeImageURL)}
             className='ImageGalleryItem-image'/>
           </li> );        
               }
