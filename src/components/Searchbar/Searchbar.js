@@ -25,7 +25,7 @@ const handleSubmit = event=>{
                         <header className="Searchbar">
                         <form className="SearchForm " onSubmit = {handleSubmit}>
                           <button type="submit" className="SearchForm-button">
-                          <span className="button-label"><FaSistrix className="Icon"/></span>
+                          <span className="SearchForm-button-label"><FaSistrix className="Icon"/></span>
                           </button>
                       
                           <input
